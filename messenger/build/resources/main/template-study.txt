@@ -1,0 +1,2 @@
+Hello #{user}!
+Today we are studying #{moduleName}
