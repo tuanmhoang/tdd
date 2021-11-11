@@ -4,17 +4,20 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Application {
+
     private MailServer mailServer;
 
-    public static void main(String[] args){
+    /**
+     * Main method
+     *
+     * @param args is the argument of this program
+     */
+    public static void main(String[] args) {
         final Application main = new Application();
         main.run(args);
-        // get args
-        // choose type
-        // handle console
-        // handle file
+
     }
 
-    private void run(String[] args) {
+    public static void run(String[] args) {
     }
 }

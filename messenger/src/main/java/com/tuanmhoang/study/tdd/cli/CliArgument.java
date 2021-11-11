@@ -1,5 +1,8 @@
 package com.tuanmhoang.study.tdd.cli;
 
+/**
+ * Arguments list
+ */
 public enum CliArgument {
     TEMPLATE_FILE_ARG("--template-file"),
     PARAMS_FILE_ARG("--params-file"),

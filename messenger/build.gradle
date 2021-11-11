@@ -3,13 +3,16 @@ plugins {
   id 'idea'
   id 'checkstyle'
   id 'pmd'
-  id 'com.bmuschko.clover' version "2.2.5"
+  id 'com.bmuschko.clover' version "3.0.1"
   id 'com.github.spotbugs' version "4.2.2"
 }
 
 repositories {
   mavenCentral()
 }
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 //-----------------------------BASE CONFIGURATION--------------------------------------------
 clover {
 
@@ -17,6 +20,12 @@ clover {
   testExcludes = ['**/Mock*.java']
 
   targetPercentage = '75%'
+
+  compiler {
+    encoding = 'UTF-8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+  }
 
   report {
     html = true
@@ -35,21 +44,33 @@ dependencies {
   clover 'org.openclover:clover:4.4.1'
   testImplementation('org.junit.jupiter:junit-jupiter:5.6.2')
   testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.6.2')
+  testRuntimeOnly('org.junit.jupiter:junit-jupiter-params:5.6.2')
   testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.6.2")
-  testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
-
-  compileOnly 'org.projectlombok:lombok:1.18.22'
-  annotationProcessor 'org.projectlombok:lombok:1.18.22'
-  testCompileOnly 'org.projectlombok:lombok:1.18.22'
-  testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+  testImplementation("org.junit.vintage:junit-vintage-engine:5.6.2")
+  testImplementation('org.mockito:mockito-core:3.9.0')
+  testImplementation("io.cucumber:cucumber-java:6.10.3")
+  testImplementation("io.cucumber:cucumber-junit:6.10.3")
+  testImplementation("io.cucumber:cucumber-junit-platform-engine:6.10.3")
 }
 
 test {
-  useJUnitPlatform()
+  systemProperty "nofs", System.getProperty("nofs")
+  useJUnitPlatform {
+    excludeTags 'integration-test'
+  }
   testLogging {
     events "passed", "skipped", "failed"
   }
 }
+
+task integrationTest(type: Test) {
+  group = "verification"
+  useJUnitPlatform {
+    includeTags 'integration-test'
+  }
+}
+
+check.dependsOn integrationTest
 
 checkstyle {
   toolVersion "7.6.1"
@@ -59,6 +80,15 @@ checkstyle {
 check.dependsOn cloverGenerateReport
 
 spotbugsMain {
+  reports {
+    html {
+      enabled = true
+      stylesheet = 'fancy-hist.xsl'
+    }
+  }
+}
+
+spotbugsTest {
   reports {
     html {
       enabled = true
@@ -98,3 +128,10 @@ tasks.withType(Pmd) {
   }
 }
 
+jar {
+  manifest {
+    attributes(
+            'Main-Class': 'com.epam.ld.module2.testing.ApplicationMain'
+    )
+  }
+}
