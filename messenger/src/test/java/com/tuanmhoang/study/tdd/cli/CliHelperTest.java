@@ -19,7 +19,12 @@ public class CliHelperTest {
 
     @Test
     public void withParameterLengthIsSixAndCorrect_should_returnAppModeIsFile(){
-        fail();
+        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
+            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
+        };
+        AppMode actualAppMode = cliHelper.decideMode(args);
+        assertEquals(AppMode.FILE,actualAppMode);
     }
 
     @Test
