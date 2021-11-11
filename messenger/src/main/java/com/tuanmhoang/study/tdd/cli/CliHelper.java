@@ -7,6 +7,7 @@ public class CliHelper {
     private static final int REQUIRED_NUMBER_OF_PARAMS = 6;
 
     public AppMode decideMode(String[] args){
-        return AppMode.CONSOLE;
+        if(args.length == 0) return AppMode.CONSOLE;
+        return  AppMode.FILE;
     }
 }
