@@ -1,14 +1,20 @@
 package com.tuanmhoang.study.tdd.cli;
 
+import com.tuanmhoang.study.tdd.mode.AppMode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CliHelperTest {
 
+    private CliHelper cliHelper = new CliHelper();
+
     @Test
     public void withParameterLengthIsZero_should_returnAppModeIsConsole(){
-        fail();
+        String[] args = {};
+        AppMode actualAppMode = cliHelper.decideMode(args);
+        assertEquals(AppMode.CONSOLE,actualAppMode);
     }
 
     @Test

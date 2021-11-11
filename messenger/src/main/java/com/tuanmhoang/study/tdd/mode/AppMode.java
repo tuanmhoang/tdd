@@ -1,6 +1,6 @@
 package com.tuanmhoang.study.tdd.mode;
 
 public enum AppMode {
-    CLI,
+    CONSOLE,
     FILE;
 }
