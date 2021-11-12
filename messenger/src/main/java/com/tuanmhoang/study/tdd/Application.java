@@ -8,6 +8,8 @@ import com.tuanmhoang.study.tdd.mail.MailServer;
 import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.mode.AppMode;
+import com.tuanmhoang.study.tdd.template.Template;
+import com.tuanmhoang.study.tdd.template.TemplateCli;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -18,6 +20,8 @@ public class Application {
     private CliHelper cliHelper;
 
     private ParameterHelper parameterHelper;
+
+    private Template template;
 
     /**
      * Main method
@@ -39,6 +43,7 @@ public class Application {
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
             this.mailServer = new MailServerCli();
+
         } else {
             this.parameterHelper = new FileParameterHelper();
             this.mailServer = new MailServerFile();
@@ -51,5 +56,9 @@ public class Application {
 
     public MailServer getMailServer(){
         return mailServer;
+    }
+
+    public Template getTemplate(){
+        return template;
     }
 }
