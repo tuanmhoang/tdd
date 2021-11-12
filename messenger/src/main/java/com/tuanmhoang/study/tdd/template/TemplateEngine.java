@@ -15,6 +15,6 @@ public class TemplateEngine {
      */
     public String generateMessage(Template template, Client client) {
 
-        return null;
+        return "hello this is not null";
     }
 }
