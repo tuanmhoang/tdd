@@ -42,6 +42,7 @@ public class CliHelperTest {
         );
 
         assertTrue(thrown.getMessage().contains("Number of parameters is wrong"));
+        assertEquals(thrown.getNumberOfParameters(), args.length);
     }
 
     @Test
