@@ -1,31 +1,20 @@
 package com.tuanmhoang.study.tdd;
 
 import com.tuanmhoang.study.tdd.cli.CliArgument;
-import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mail.MailServerFile;
-import com.tuanmhoang.study.tdd.template.Template;
-import com.tuanmhoang.study.tdd.template.TemplateCli;
-import com.tuanmhoang.study.tdd.template.TemplateFile;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class ApplicationTest {
     /**
