@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CliHelperTest {
 
@@ -28,12 +30,22 @@ public class CliHelperTest {
     }
 
     @Test
-    public void withParameterLengthIsSixAndInCorrect_should_returnAppModeIsFile(){
-        fail();
+    public void withParameterLengthIsNotZeroOrSix_shouldThrowException(){
+        String[] args = {
+            CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt"
+        };
+
+        CliArgumentException thrown = assertThrows(
+            CliArgumentException.class,
+            () -> cliHelper.decideMode(args)
+        );
+
+        assertTrue(thrown.getMessage().contains("Number of parameters is wrong"));
     }
 
     @Test
-    public void withParameterLengthIsNotZeroOrSix_should_throwException(){
+    public void withInvalidParameter_should_throwException(){
         fail();
     }
 
