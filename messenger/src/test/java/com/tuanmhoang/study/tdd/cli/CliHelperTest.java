@@ -46,8 +46,20 @@ public class CliHelperTest {
     }
 
     @Test
-    public void withInvalidParameter_should_throwException(){
-        fail();
+    public void withInvalidParameter_shouldThrowException(){
+        String[] args = {
+            "incorrect-params","template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt"
+        };
+
+        CliArgumentException thrown = assertThrows(
+            CliArgumentException.class,
+            () -> cliHelper.decideMode(args)
+        );
+
+        assertTrue(thrown.getMessage().contains("Parameters is incorrect"));
+        assertEquals(thrown.getNumberOfParameters(), args.length);
     }
 
 }
