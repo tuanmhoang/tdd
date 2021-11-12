@@ -10,6 +10,7 @@ import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import com.tuanmhoang.study.tdd.template.Template;
 import com.tuanmhoang.study.tdd.template.TemplateCli;
+import com.tuanmhoang.study.tdd.template.TemplateFile;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -47,6 +48,7 @@ public class Application {
         } else {
             this.parameterHelper = new FileParameterHelper();
             this.mailServer = new MailServerFile();
+            this.template = new TemplateFile();
         }
     }
 
