@@ -1,8 +1,13 @@
 package com.tuanmhoang.study.tdd.helper;
 
+import com.tuanmhoang.study.tdd.file.FileHelper;
+import java.io.File;
 import java.util.Map;
 
 public class FileParameterHelper implements ParameterHelper{
+
+    private FileHelper fileHelper;
+
     @Override
     public Map<String, String> getParams() {
         return null;
@@ -10,7 +15,10 @@ public class FileParameterHelper implements ParameterHelper{
 
     @Override
     public String getTemplateText() {
-        return null;
+        // read file
+        // get text
+        // return text
+        return "this is not null";
     }
 
     @Override
