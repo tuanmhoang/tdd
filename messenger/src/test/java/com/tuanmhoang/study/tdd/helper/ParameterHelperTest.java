@@ -17,4 +17,11 @@ public class ParameterHelperTest {
         assertTrue(templateText.contains("This message is generated based on the CONSOLE template."));
     }
 
+    @Test
+    public void getTemplateText_withFileParameterHelper(){
+        parameterHelper = new FileParameterHelper();
+        String templateText = parameterHelper.getTemplateText();
+        assertNotNull(templateText);
+    }
+
 }
