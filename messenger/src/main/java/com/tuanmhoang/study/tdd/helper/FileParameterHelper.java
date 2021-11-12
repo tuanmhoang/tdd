@@ -1,7 +1,6 @@
 package com.tuanmhoang.study.tdd.helper;
 
-import com.tuanmhoang.study.tdd.file.FileHelper;
-import java.io.File;
+import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import java.util.Map;
 
 public class FileParameterHelper implements ParameterHelper{
