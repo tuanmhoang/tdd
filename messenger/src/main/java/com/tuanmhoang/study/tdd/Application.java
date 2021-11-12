@@ -37,7 +37,7 @@ public class Application {
         AppMode appMode = cliHelper.decideMode(args);
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
-
+            this.mailServer = new MailServerCli();
         } else {
             this.parameterHelper = new FileParameterHelper();
         }
