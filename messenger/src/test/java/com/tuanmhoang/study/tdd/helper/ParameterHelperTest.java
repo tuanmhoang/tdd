@@ -14,7 +14,7 @@ public class ParameterHelperTest {
         parameterHelper = new CliParameterHelper();
         String templateText = parameterHelper.getTemplateText();
         assertNotNull(templateText);
-        assertTrue(templateText.contains("This message is generated with the template in CONSOLE mode"));
+        assertTrue(templateText.contains("This message is generated based on the CONSOLE template."));
     }
 
 }

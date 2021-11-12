@@ -10,7 +10,10 @@ public class CliParameterHelper implements ParameterHelper{
 
     @Override
     public String getTemplateText() {
-        return "this is not null";
+        return "To: #{address}\n"
+            + "Hello #{user},\n"
+            + "Today we are studying #{moduleName}."
+            + "This message is generated based on the CONSOLE template.";
     }
 
     @Override
