@@ -43,11 +43,11 @@ public class Application {
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
             this.mailServer = new MailServerCli();
-            this.template = new TemplateCli();
+            //this.template = new TemplateCli();
         } else {
             this.parameterHelper = new FileParameterHelper();
             this.mailServer = new MailServerFile();
-            this.template = new TemplateFile();
+            //this.template = new TemplateFile();
         }
         final Client client = new Client(sampleAddress);
         TemplateEngine templateEngine = new TemplateEngine();

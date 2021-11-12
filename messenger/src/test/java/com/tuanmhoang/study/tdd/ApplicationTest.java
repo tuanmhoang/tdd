@@ -68,22 +68,4 @@ public class ApplicationTest {
         assertTrue(app.getMailServer() instanceof MailServerFile);
     }
 
-    @Test
-    public void getTemplate_shouldReturnTemplateCli() {
-        String[] args = {};
-        app = new Application();
-        app.run(args);
-        assertTrue(app.getTemplate() instanceof TemplateCli);
-    }
-
-    @Test
-    public void getMailServer_shouldReturnTemplateFile() {
-        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
-            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
-            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
-        };
-        app = new Application();
-        app.run(args);
-        assertTrue(app.getTemplate() instanceof TemplateFile);
-    }
 }
