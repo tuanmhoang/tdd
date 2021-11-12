@@ -6,6 +6,7 @@ import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.helper.ParameterHelper;
 import com.tuanmhoang.study.tdd.mail.MailServer;
 import com.tuanmhoang.study.tdd.mail.MailServerCli;
+import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -40,6 +41,7 @@ public class Application {
             this.mailServer = new MailServerCli();
         } else {
             this.parameterHelper = new FileParameterHelper();
+            this.mailServer = new MailServerFile();
         }
     }
 
