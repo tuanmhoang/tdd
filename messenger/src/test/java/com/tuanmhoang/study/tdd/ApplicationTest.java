@@ -2,6 +2,7 @@ package com.tuanmhoang.study.tdd;
 
 import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
+import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
@@ -35,10 +36,18 @@ public class ApplicationTest {
     }
 
     @Test
-    public void getParameterHelper_shouldReturnCliHelper() {
+    public void getParameterHelper_shouldReturnCliParameterHelper() {
         String[] args = {};
         app = new Application();
         app.run(args);
         assertTrue(app.getParameterHelper() instanceof CliParameterHelper);
+    }
+
+    @Test
+    public void getParameterHelper_shouldReturnFileParameterHelper() {
+        String[] args = {};
+        app = new Application();
+        app.run(args);
+        assertTrue(app.getParameterHelper() instanceof FileParameterHelper);
     }
 }
