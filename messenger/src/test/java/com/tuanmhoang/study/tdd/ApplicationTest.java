@@ -4,6 +4,7 @@ import com.tuanmhoang.study.tdd.cli.CliArgument;
 import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
+import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
@@ -53,5 +54,13 @@ public class ApplicationTest {
         app = new Application();
         app.run(args);
         assertTrue(app.getParameterHelper() instanceof FileParameterHelper);
+    }
+
+    @Test
+    public void getMailServer_shouldReturnMailServerCli() {
+        String[] args = {};
+        app = new Application();
+        app.run(args);
+        assertTrue(app.getMailServer() instanceof MailServerCli);
     }
 }

@@ -4,6 +4,8 @@ import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.helper.ParameterHelper;
+import com.tuanmhoang.study.tdd.mail.MailServer;
+import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -35,6 +37,7 @@ public class Application {
         AppMode appMode = cliHelper.decideMode(args);
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
+
         } else {
             this.parameterHelper = new FileParameterHelper();
         }
@@ -42,5 +45,9 @@ public class Application {
 
     public ParameterHelper getParameterHelper() {
         return parameterHelper;
+    }
+
+    public MailServer getMailServer(){
+        return mailServer;
     }
 }

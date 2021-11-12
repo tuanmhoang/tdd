@@ -1,6 +1,7 @@
 package com.tuanmhoang.study.tdd;
 
 
+import com.tuanmhoang.study.tdd.mail.MailServer;
 import com.tuanmhoang.study.tdd.template.Template;
 import com.tuanmhoang.study.tdd.template.TemplateEngine;
 
