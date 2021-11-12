@@ -6,6 +6,14 @@ package com.tuanmhoang.study.tdd;
 public class Client {
     private String addresses;
 
+    public Client() {
+
+    }
+
+    public Client(String addresses) {
+        this.addresses = addresses;
+    }
+
     /**
      * Gets addresses.
      *

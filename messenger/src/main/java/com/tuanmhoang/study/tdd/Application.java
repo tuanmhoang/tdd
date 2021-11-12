@@ -10,6 +10,7 @@ import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import com.tuanmhoang.study.tdd.template.Template;
 import com.tuanmhoang.study.tdd.template.TemplateCli;
+import com.tuanmhoang.study.tdd.template.TemplateEngine;
 import com.tuanmhoang.study.tdd.template.TemplateFile;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -23,6 +24,8 @@ public class Application {
     private ParameterHelper parameterHelper;
 
     private Template template;
+
+    private String sampleAddress = "johndoe@myapp.com";
 
     /**
      * Main method
@@ -50,6 +53,9 @@ public class Application {
             this.mailServer = new MailServerFile();
             this.template = new TemplateFile();
         }
+        final Client client = new Client(sampleAddress);
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.generateMessage(template,client);
     }
 
     public ParameterHelper getParameterHelper() {
