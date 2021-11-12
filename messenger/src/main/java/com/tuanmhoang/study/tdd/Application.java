@@ -2,6 +2,7 @@ package com.tuanmhoang.study.tdd;
 
 import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
+import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.helper.ParameterHelper;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import java.io.InputStream;
@@ -35,7 +36,7 @@ public class Application {
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
         } else {
-
+            this.parameterHelper = new FileParameterHelper();
         }
     }
 

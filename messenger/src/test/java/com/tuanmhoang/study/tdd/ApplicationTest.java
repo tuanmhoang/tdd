@@ -1,5 +1,6 @@
 package com.tuanmhoang.study.tdd;
 
+import com.tuanmhoang.study.tdd.cli.CliArgument;
 import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
@@ -45,7 +46,10 @@ public class ApplicationTest {
 
     @Test
     public void getParameterHelper_shouldReturnFileParameterHelper() {
-        String[] args = {};
+        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
+            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
+        };
         app = new Application();
         app.run(args);
         assertTrue(app.getParameterHelper() instanceof FileParameterHelper);
