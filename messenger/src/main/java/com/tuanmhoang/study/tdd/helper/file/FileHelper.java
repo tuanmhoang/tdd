@@ -1,7 +1,7 @@
 package com.tuanmhoang.study.tdd.helper.file;
 
 public class FileHelper {
-
-
-
+    public String readFileContents(){
+        return null;
+    }
 }
