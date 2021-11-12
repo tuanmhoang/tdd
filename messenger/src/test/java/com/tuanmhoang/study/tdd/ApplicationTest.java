@@ -8,6 +8,7 @@ import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.template.Template;
 import com.tuanmhoang.study.tdd.template.TemplateCli;
+import com.tuanmhoang.study.tdd.template.TemplateFile;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
@@ -84,5 +85,16 @@ public class ApplicationTest {
         app = new Application();
         app.run(args);
         assertTrue(app.getTemplate() instanceof TemplateCli);
+    }
+
+    @Test
+    public void getMailServer_shouldReturnTemplateFile() {
+        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
+            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
+        };
+        app = new Application();
+        app.run(args);
+        assertTrue(app.getTemplate() instanceof TemplateFile);
     }
 }
