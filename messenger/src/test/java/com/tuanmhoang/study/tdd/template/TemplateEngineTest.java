@@ -4,9 +4,10 @@ import com.tuanmhoang.study.tdd.Client;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TemplateEngineTest {
-    private TemplateEngine templateEngine;
+    private TemplateEngine templateEngine = new TemplateEngine();
 
     private Template template;
 
@@ -15,9 +16,12 @@ public class TemplateEngineTest {
     @Test
     public void generateMessage_withTemplateCli_success() {
         template = new TemplateCli();
-        assertEquals("Hello #{user}!/n"
+        assertEquals("To: #{client}/n"
+                + "Hello #{user}!/n"
                 + "Today we are studying #{moduleName}/n"
                 + "This message is generated in CONSOLE mode.",
             template.getMessage());
+        String builtMessage = templateEngine.generateMessage(template, client);
+        assertNotNull(builtMessage);
     }
 }
