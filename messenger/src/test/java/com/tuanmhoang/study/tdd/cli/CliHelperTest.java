@@ -61,5 +61,4 @@ public class CliHelperTest {
         assertTrue(thrown.getMessage().contains("Parameters is incorrect"));
         assertEquals(thrown.getNumberOfParameters(), args.length);
     }
-
 }
