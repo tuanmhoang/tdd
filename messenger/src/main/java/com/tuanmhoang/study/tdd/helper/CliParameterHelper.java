@@ -10,7 +10,7 @@ public class CliParameterHelper implements ParameterHelper{
 
     @Override
     public String getTemplateText() {
-        return null;
+        return "this is not null";
     }
 
     @Override
