@@ -1,16 +1,20 @@
 package com.tuanmhoang.study.tdd.helper;
 
+import com.tuanmhoang.study.tdd.cli.CliArgumentException;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParameterHelperTest {
 
     private ParameterHelper parameterHelper;
+    private static final String DEFAULT_PARAMETER_FILE_NAME = "params.txt";
 
     private static final String EXPECTED_FILE_CONTENT ="To: #{address}\n"
         + "Hello #{user}!\n"
@@ -40,6 +44,13 @@ public class ParameterHelperTest {
         assertEquals(2, parameterHelper.getParams().size());
         assertEquals("Tuan",parameterHelper.getParams().get("user"));
         assertEquals("TDD",parameterHelper.getParams().get("moduleName"));
+    }
+
+    @Test
+    public void getParams_shouldBeZeroWhenReadParamsTemplateFileThrowException(){
+        parameterHelper = new FileParameterHelper();
+        assertNotNull(parameterHelper.getParams());
+        assertEquals(0,parameterHelper.getParams().size());
     }
 
 }
