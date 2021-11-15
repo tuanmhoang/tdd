@@ -2,12 +2,18 @@ package com.tuanmhoang.study.tdd.helper;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParameterHelperTest {
 
     private ParameterHelper parameterHelper;
+
+    private static final String EXPECTED_FILE_CONTENT ="To: #{address}\n"
+        + "Hello #{user}!\n"
+        + "Today we are studying #{moduleName}\n"
+        + "This message is generated based on the FILE template.";
 
     @Test
     public void getTemplateText_withCliParameterHelper(){
@@ -22,6 +28,7 @@ public class ParameterHelperTest {
         parameterHelper = new FileParameterHelper();
         String templateText = parameterHelper.getTemplateText();
         assertNotNull(templateText);
+        assertEquals(EXPECTED_FILE_CONTENT, templateText);
     }
 
 }
