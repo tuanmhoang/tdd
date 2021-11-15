@@ -33,4 +33,10 @@ public class ParameterHelperTest {
         assertEquals(EXPECTED_FILE_CONTENT, templateText);
     }
 
+    @Test
+    public void getParams_shouldSuccess(){
+        parameterHelper = new FileParameterHelper();
+        assertNotNull(parameterHelper.getParams());
+    }
+
 }

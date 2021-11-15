@@ -7,8 +7,11 @@ import java.util.Map;
 public class FileParameterHelper implements ParameterHelper {
 
     private static final String DEFAULT_TEMPLATE_FILE = "template-study.txt";
+    private static final String DEFAULT_PARAMS_FILE = "params.txt";
 
     private FileHelper fileHelper;
+
+    private Map<String, String> params;
 
     @Override
     public Map<String, String> getParams() {
@@ -17,7 +20,6 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public String getTemplateText() {
-
         fileHelper = new FileHelper();
         String templateContents = null;
         try {
