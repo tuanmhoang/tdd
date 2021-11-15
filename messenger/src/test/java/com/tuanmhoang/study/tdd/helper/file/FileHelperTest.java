@@ -21,7 +21,7 @@ public class FileHelperTest {
         + "This message is generated based on the FILE template.";
 
     @Test
-    public void readFileContent_shouldSuccess() throws IOException, URISyntaxException {
+    public void readFileContent_shouldSuccess() throws IOException, FileParameterHelperException {
         String templateFileName = "template-study.txt";
         String fileContents = fileHelper.withTemplateFileName(templateFileName).readFileContents();
         assertNotNull(fileContents);

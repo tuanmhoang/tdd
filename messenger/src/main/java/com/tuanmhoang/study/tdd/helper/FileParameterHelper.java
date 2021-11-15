@@ -1,9 +1,13 @@
 package com.tuanmhoang.study.tdd.helper;
 
 import com.tuanmhoang.study.tdd.helper.file.FileHelper;
+import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
+import java.io.IOException;
 import java.util.Map;
 
-public class FileParameterHelper implements ParameterHelper{
+public class FileParameterHelper implements ParameterHelper {
+
+    private static final String DEFAULT_TEMPLATE_FILE = "template-study.txt";
 
     private FileHelper fileHelper;
 
@@ -14,10 +18,16 @@ public class FileParameterHelper implements ParameterHelper{
 
     @Override
     public String getTemplateText() {
-        // read file
-        // get text
-        // return text
-        return "this is not null";
+        fileHelper = new FileHelper();
+        String templateContents = null;
+        try {
+            templateContents = fileHelper.withTemplateFileName(DEFAULT_TEMPLATE_FILE).readFileContents();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FileParameterHelperException e) {
+            e.printStackTrace();
+        }
+        return templateContents;
     }
 
     @Override
