@@ -2,6 +2,7 @@ package com.tuanmhoang.study.tdd.helper;
 
 import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FileParameterHelper implements ParameterHelper {
@@ -15,7 +16,8 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public Map<String, String> getParams() {
-        return null;
+        readParams();
+        return params;
     }
 
     @Override
@@ -32,6 +34,6 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public void readParams() {
-
+        params = new HashMap<>();
     }
 }
