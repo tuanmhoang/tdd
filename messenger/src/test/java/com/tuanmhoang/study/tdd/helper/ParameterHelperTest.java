@@ -39,7 +39,7 @@ public class ParameterHelperTest {
         assertNotNull(parameterHelper.getParams());
         assertEquals(2, parameterHelper.getParams().size());
         assertEquals("Tuan",parameterHelper.getParams().get("user"));
-        assertEquals("moduleName",parameterHelper.getParams().get("TDD"));
+        assertEquals("TDD",parameterHelper.getParams().get("moduleName"));
     }
 
 }

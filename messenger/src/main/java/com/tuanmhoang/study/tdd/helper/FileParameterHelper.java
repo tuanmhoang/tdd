@@ -35,7 +35,7 @@ public class FileParameterHelper implements ParameterHelper {
     @Override
     public void readParams() {
         params = new HashMap<>();
-        params.put("this","is");
-        params.put("not","null");
+        params.put("user","Tuan");
+        params.put("moduleName","TDD");
     }
 }
