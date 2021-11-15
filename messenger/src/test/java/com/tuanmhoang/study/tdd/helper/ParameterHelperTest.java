@@ -37,7 +37,7 @@ public class ParameterHelperTest {
     public void getParams_shouldSuccess(){
         parameterHelper = new FileParameterHelper();
         assertNotNull(parameterHelper.getParams());
-        assertEquals(2, parameterHelper.getParams());
+        assertEquals(2, parameterHelper.getParams().size());
     }
 
 }
