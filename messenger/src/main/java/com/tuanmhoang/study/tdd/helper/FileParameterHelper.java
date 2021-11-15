@@ -10,9 +10,13 @@ public class FileParameterHelper implements ParameterHelper {
     private static final String DEFAULT_TEMPLATE_FILE = "template-study.txt";
     private static final String DEFAULT_PARAMS_FILE = "params.txt";
 
-    private FileHelper fileHelper;
+    private final FileHelper fileHelper;
 
     private Map<String, String> params;
+
+    public FileParameterHelper(FileHelper fileHelper){
+        this.fileHelper = fileHelper;
+    }
 
     @Override
     public Map<String, String> getParams() {
@@ -22,7 +26,7 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public String getTemplateText() {
-        fileHelper = new FileHelper();
+        //fileHelper = new FileHelper();
         String templateContents = null;
         try {
             templateContents = fileHelper.withTemplateFileName(DEFAULT_TEMPLATE_FILE).readFileContents();
@@ -34,8 +38,18 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public void readParams() {
+        //fileHelper = new FileHelper();
         params = new HashMap<>();
-        params.put("user","Tuan");
-        params.put("moduleName","TDD");
+        String paramsContents = null;
+        try {
+            paramsContents = fileHelper.withTemplateFileName(DEFAULT_PARAMS_FILE).readFileContents();
+            String[] linesData = paramsContents.split("\n");
+            for (String line:  linesData) {
+                String[] lineData = line.split("=");
+                params.put(lineData[0],lineData[1]);
+            }
+        } catch (FileParameterHelperException e) {
+            System.err.println("Exception when read file params template: " + e);
+        }
     }
 }

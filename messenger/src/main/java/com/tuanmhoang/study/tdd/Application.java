@@ -4,6 +4,7 @@ import com.tuanmhoang.study.tdd.cli.CliHelper;
 import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.helper.ParameterHelper;
+import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.mail.MailServer;
 import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mail.MailServerFile;
@@ -16,6 +17,8 @@ public class Application {
     private MailServer mailServer;
 
     private CliHelper cliHelper;
+
+    private FileHelper fileHelper;
 
     private ParameterHelper parameterHelper;
 
@@ -39,13 +42,14 @@ public class Application {
 
     public void run(String[] args) {
         cliHelper = new CliHelper();
+        fileHelper = new FileHelper();
         AppMode appMode = cliHelper.decideMode(args);
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
             this.mailServer = new MailServerCli();
             //this.template = new TemplateCli();
         } else {
-            this.parameterHelper = new FileParameterHelper();
+            this.parameterHelper = new FileParameterHelper(fileHelper);
             this.mailServer = new MailServerFile();
             //this.template = new TemplateFile();
         }
