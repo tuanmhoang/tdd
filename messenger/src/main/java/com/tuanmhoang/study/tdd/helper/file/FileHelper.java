@@ -2,29 +2,22 @@ package com.tuanmhoang.study.tdd.helper.file;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.charset.Charset;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import org.apache.commons.io.Charsets;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 
 public class FileHelper {
 
     private String templateFileName;
 
-    private static final String EXPECTED_FILE_CONTENT = "To: #{address}\n"
-        + "Hello #{user}!\n"
-        + "Today we are studying #{moduleName}\n"
-        + "This message is generated based on the FILE template.";
-
     public String readFileContents() throws IOException, FileParameterHelperException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(templateFileName);
+        if(resource == null ) throw new FileParameterHelperException("File does not exist.",templateFileName);
 
-        return EXPECTED_FILE_CONTENT;
+        File file = new File(resource.getFile());
+        String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n","\n");
+        return content;
     }
 
     public String getTemplateFileName() {

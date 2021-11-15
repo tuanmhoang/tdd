@@ -1,2 +1,0 @@
-user=Tuan
-moduleName=TDD

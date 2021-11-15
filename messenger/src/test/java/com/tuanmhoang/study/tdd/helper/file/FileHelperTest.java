@@ -22,7 +22,8 @@ public class FileHelperTest {
 
     @Test
     public void readFileContent_shouldSuccess() throws IOException, URISyntaxException {
-        String fileContents = fileHelper.readFileContents();
+        String templateFileName = "template-study.txt";
+        String fileContents = fileHelper.withTemplateFileName(templateFileName).readFileContents();
         assertNotNull(fileContents);
         assertEquals(EXPECTED_FILE_CONTENT, fileContents);
     }
@@ -34,7 +35,7 @@ public class FileHelperTest {
             FileParameterHelperException.class,
             () -> fileHelper.withTemplateFileName(notExistFileName).readFileContents()
         );
-        assertTrue(thrown.getMessage().equals("File InputStream is null."));
+        assertTrue(thrown.getMessage().equals("File does not exist."));
         assertEquals(thrown.getFileName(), notExistFileName);
     }
 }
