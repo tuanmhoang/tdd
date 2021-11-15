@@ -2,6 +2,7 @@ package com.tuanmhoang.study.tdd.helper;
 
 import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +33,9 @@ public class ParameterHelperTest {
     @Test
     public void getParamsCli_shouldSuccess(){
         parameterHelper = new CliParameterHelper();
-        assertNotNull(parameterHelper.getParams());
+        Map<String, String> params = parameterHelper.getParams();
+        assertNotNull(params);
+        assertEquals(3,params.size());
     }
 
     @Test
