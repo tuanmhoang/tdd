@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import org.apache.commons.io.FileUtils;
 
 public class FileHelper {
@@ -19,11 +18,15 @@ public class FileHelper {
         File file = new File(resource.getFile());
         String content = null;
         try {
-            content = FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n","\n");
+            content = readFileAsString(file);
         } catch (IOException e) {
-            throw new FileParameterHelperException("Error while reading file", templateFileName);
+            throw new FileParameterHelperException("Error while reading file.", templateFileName);
         }
         return content;
+    }
+
+    public String readFileAsString(File file) throws IOException {
+        return FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n","\n");
     }
 
     public String getTemplateFileName() {
@@ -34,4 +37,5 @@ public class FileHelper {
         this.templateFileName = templateFileName;
         return this;
     }
+
 }

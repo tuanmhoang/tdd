@@ -1,16 +1,15 @@
 package com.tuanmhoang.study.tdd.helper.file;
 
-import com.tuanmhoang.study.tdd.cli.CliArgumentException;
+import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.spy;
 
 public class FileHelperTest {
     private FileHelper fileHelper = new FileHelper();
@@ -36,18 +35,19 @@ public class FileHelperTest {
             FileParameterHelperException.class,
             () -> fileHelper.withTemplateFileName(notExistFileName).readFileContents()
         );
-        assertTrue(thrown.getMessage().equals("File does not exist."));
+        assertEquals(thrown.getMessage(),"File does not exist.");
         assertEquals(thrown.getFileName(), notExistFileName);
     }
 
     @Test
     public void readFileContent_shouldThrowFileParameterHelperException_whenReadFile() throws FileParameterHelperException, IOException {
-        String notExistFileName = "notExist";
+        FileHelper mocked = spy(FileHelper.class);
+        doThrow(new IOException()).when(mocked).readFileAsString(any(File.class));
         FileParameterHelperException thrown = assertThrows(
             FileParameterHelperException.class,
-            () -> fileHelper.withTemplateFileName(TEMPLATE_FILE_NAME).readFileContents()
+            () -> mocked.withTemplateFileName(TEMPLATE_FILE_NAME).readFileContents()
         );
-        assertTrue(thrown.getMessage().equals("Error while reading file"));
-        assertEquals(thrown.getFileName(), notExistFileName);
+        assertEquals(thrown.getMessage(),"Error while reading file.");
+        assertEquals(thrown.getFileName(), TEMPLATE_FILE_NAME);
     }
 }

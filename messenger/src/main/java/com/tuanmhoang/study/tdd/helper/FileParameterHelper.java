@@ -2,7 +2,6 @@ package com.tuanmhoang.study.tdd.helper;
 
 import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
-import java.io.IOException;
 import java.util.Map;
 
 public class FileParameterHelper implements ParameterHelper {
@@ -18,6 +17,7 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public String getTemplateText() {
+
         fileHelper = new FileHelper();
         String templateContents = null;
         try {
