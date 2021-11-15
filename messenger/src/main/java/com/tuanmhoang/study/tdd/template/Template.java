@@ -7,13 +7,14 @@ import com.tuanmhoang.study.tdd.helper.ParameterHelper;
  */
 public class Template {
 
-    private ParameterHelper parameterHelper;
+    private final ParameterHelper parameterHelper;
+
+    public Template(ParameterHelper parameterHelper){
+        this.parameterHelper = parameterHelper;
+    }
 
     public ParameterHelper getParameterHelper() {
         return parameterHelper;
     }
 
-    public void setParameterHelper(ParameterHelper parameterHelper) {
-        this.parameterHelper = parameterHelper;
-    }
 }

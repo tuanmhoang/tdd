@@ -1,6 +1,7 @@
 package com.tuanmhoang.study.tdd.template;
 
 import com.tuanmhoang.study.tdd.Client;
+import com.tuanmhoang.study.tdd.helper.CliParameterHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class TemplateEngineTest {
 
     @Test
     public void generateMessage_withTemplateCli_success() {
-        template = new Template();
-
+        template = new Template(new CliParameterHelper());
+        String msg = templateEngine.generateMessage(template, client);
     }
 }

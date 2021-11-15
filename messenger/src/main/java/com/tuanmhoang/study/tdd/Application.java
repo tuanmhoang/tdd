@@ -22,7 +22,6 @@ public class Application {
 
     private ParameterHelper parameterHelper;
 
-    private Template template;
 
     private String sampleAddress = "johndoe@myapp.com";
 
@@ -47,15 +46,19 @@ public class Application {
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper();
             this.mailServer = new MailServerCli();
+            //this.parameterHelper = new CliParameterHelper();
             //this.template = new TemplateCli();
         } else {
             this.parameterHelper = new FileParameterHelper(fileHelper);
             this.mailServer = new MailServerFile();
+            //this.parameterHelper = new FileParameterHelper();
             //this.template = new TemplateFile();
         }
         final Client client = new Client(sampleAddress);
+        Template template = new Template(parameterHelper);
         TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.generateMessage(template,client);
+        String generatedMessage = templateEngine.generateMessage(template,client);
+        System.out.println("generatedMessage: "+ generatedMessage);
     }
 
     public ParameterHelper getParameterHelper() {
@@ -66,7 +69,4 @@ public class Application {
         return mailServer;
     }
 
-    public Template getTemplate(){
-        return template;
-    }
 }

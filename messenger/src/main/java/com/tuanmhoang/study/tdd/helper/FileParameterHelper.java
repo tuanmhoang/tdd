@@ -26,7 +26,6 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public String getTemplateText() {
-        //fileHelper = new FileHelper();
         String templateContents = null;
         try {
             templateContents = fileHelper.withTemplateFileName(DEFAULT_TEMPLATE_FILE).readFileContents();
