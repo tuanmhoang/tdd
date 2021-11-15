@@ -22,8 +22,6 @@ public class FileParameterHelper implements ParameterHelper {
         String templateContents = null;
         try {
             templateContents = fileHelper.withTemplateFileName(DEFAULT_TEMPLATE_FILE).readFileContents();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (FileParameterHelperException e) {
             e.printStackTrace();
         }

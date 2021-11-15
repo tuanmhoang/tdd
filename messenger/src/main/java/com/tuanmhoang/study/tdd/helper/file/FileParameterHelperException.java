@@ -1,6 +1,6 @@
 package com.tuanmhoang.study.tdd.helper.file;
 
-public class FileParameterHelperException extends Exception {
+public class FileParameterHelperException extends RuntimeException {
     /**
      * Name of file.
      */

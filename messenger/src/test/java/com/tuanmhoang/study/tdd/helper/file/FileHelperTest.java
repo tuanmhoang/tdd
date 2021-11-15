@@ -20,10 +20,11 @@ public class FileHelperTest {
         + "Today we are studying #{moduleName}\n"
         + "This message is generated based on the FILE template.";
 
+    private static final String TEMPLATE_FILE_NAME = "template-study.txt";
+
     @Test
     public void readFileContent_shouldSuccess() throws IOException, FileParameterHelperException {
-        String templateFileName = "template-study.txt";
-        String fileContents = fileHelper.withTemplateFileName(templateFileName).readFileContents();
+        String fileContents = fileHelper.withTemplateFileName(TEMPLATE_FILE_NAME).readFileContents();
         assertNotNull(fileContents);
         assertEquals(EXPECTED_FILE_CONTENT, fileContents);
     }
@@ -36,6 +37,17 @@ public class FileHelperTest {
             () -> fileHelper.withTemplateFileName(notExistFileName).readFileContents()
         );
         assertTrue(thrown.getMessage().equals("File does not exist."));
+        assertEquals(thrown.getFileName(), notExistFileName);
+    }
+
+    @Test
+    public void readFileContent_shouldThrowFileParameterHelperException_whenReadFile() throws FileParameterHelperException, IOException {
+        String notExistFileName = "notExist";
+        FileParameterHelperException thrown = assertThrows(
+            FileParameterHelperException.class,
+            () -> fileHelper.withTemplateFileName(TEMPLATE_FILE_NAME).readFileContents()
+        );
+        assertTrue(thrown.getMessage().equals("Error while reading file"));
         assertEquals(thrown.getFileName(), notExistFileName);
     }
 }
