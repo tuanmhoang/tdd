@@ -1,11 +1,16 @@
 package com.tuanmhoang.study.tdd.helper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CliParameterHelper implements ParameterHelper{
+
+    private Map<String, String> params;
+
     @Override
     public Map<String, String> getParams() {
-        return null;
+        readParams();
+        return params;
     }
 
     @Override
@@ -18,6 +23,6 @@ public class CliParameterHelper implements ParameterHelper{
 
     @Override
     public void readParams() {
-
+        params = new HashMap<>();
     }
 }
