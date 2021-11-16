@@ -16,7 +16,7 @@ public class TemplateEngineTest {
 
     @Test
     public void generateMessage_withTemplateCli_success() {
-        template = new Template(new CliParameterHelper());
+        template = new Template(new CliParameterHelper(System.in));
         String msg = templateEngine.generateMessage(template, client);
     }
 }

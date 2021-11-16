@@ -37,7 +37,6 @@ public class FileParameterHelper implements ParameterHelper {
 
     @Override
     public void readParams() {
-        //fileHelper = new FileHelper();
         params = new HashMap<>();
         String paramsContents = null;
         try {

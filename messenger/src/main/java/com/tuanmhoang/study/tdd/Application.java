@@ -44,7 +44,7 @@ public class Application {
         fileHelper = new FileHelper();
         AppMode appMode = cliHelper.decideMode(args);
         if (appMode.equals(AppMode.CONSOLE)){
-            this.parameterHelper = new CliParameterHelper();
+            this.parameterHelper = new CliParameterHelper(System.in);
             this.mailServer = new MailServerCli();
             //this.parameterHelper = new CliParameterHelper();
             //this.template = new TemplateCli();
