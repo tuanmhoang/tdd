@@ -21,6 +21,10 @@ public class ParameterHelperTest {
     private FileHelper fileHelper;
     private static final String DEFAULT_PARAMETER_FILE_NAME = "params.txt";
 
+    private static final String PLACE_HOLDER_ADDRESS = "#{address}";
+    private static final String PLACE_HOLDER_USER = "#{user}";
+    private static final String PLACE_HOLDER_MODULE = "#{moduleName}";
+
     private static final String EXPECTED_TEMPLATE_FILE_CONTENT ="To: #{address}\n"
         + "Hello #{user}!\n"
         + "Today we are studying #{moduleName}\n"
@@ -41,22 +45,42 @@ public class ParameterHelperTest {
 
     @Test
     public void getParamsCli_shouldSuccess(){
-        String template = EXPECTED_CONSOLE_FILE_CONTENT;
+        Map<String, String> mapParams1 = new HashMap<>();
+        mapParams1.put("address", "sample@demo.com");
+        mapParams1.put("user", "Tuan");
+        mapParams1.put("moduleName", "TDD");
 
-        Map<String, String> mapParams = new HashMap<>();
-        mapParams.put("address", "sample@demo.com");
-        mapParams.put("user", "Tuan");
-        mapParams.put("moduleName", "TDD");
+        String input1 = EXPECTED_CONSOLE_FILE_CONTENT.replace(PLACE_HOLDER_ADDRESS, mapParams1.get("address"))
+            .replace(PLACE_HOLDER_USER, mapParams1.get("user"))
+            .replace(PLACE_HOLDER_MODULE, mapParams1.get("moduleName"));
+
+        ByteArrayInputStream inputStreamCaptor = new ByteArrayInputStream(input1.getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStreamCaptor);
 
         parameterHelper = new CliParameterHelper(System.in);
 
-        Map<String, String> params = parameterHelper.getParams();
+        Map<String, String> params1 = parameterHelper.getParams();
 
-        assertNotNull(params);
-        assertEquals(3,params.size());
-        assertEquals("sample@demo.com",params.get("address"));
-        assertEquals("Tuan",params.get("user"));
-        assertEquals("TDD",params.get("moduleName"));
+        assertNotNull(params1);
+        assertEquals(3,params1.size());
+        assertEquals("sample@demo.com",params1.get("address"));
+        assertEquals("Tuan",params1.get("user"));
+        assertEquals("TDD",params1.get("moduleName"));
+        //******//
+//        Map<String, String> mapParams2 = new HashMap<>();
+//        mapParams2.put("address", "sample2@demo.com");
+//        mapParams2.put("user", "Hoang");
+//        mapParams2.put("moduleName", "AWS");
+//
+//        parameterHelper = new CliParameterHelper(System.in);
+//
+//        Map<String, String> params1 = parameterHelper.getParams();
+//
+//        assertNotNull(params1);
+//        assertEquals(3,params1.size());
+//        assertEquals("sample@demo.com",params1.get("address"));
+//        assertEquals("Tuan",params1.get("user"));
+//        assertEquals("TDD",params1.get("moduleName"));
     }
 
     @Test
