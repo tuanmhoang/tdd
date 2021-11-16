@@ -31,8 +31,8 @@ public class CliParameterHelper implements ParameterHelper {
     @Override
     public void readParams() {
         params = new HashMap<>();
-        params.put("not", "null");
-        params.put("this", "is");
-        params.put("dummy", "data");
+        params.put("address", "sample@demo.com");
+        params.put("user", "Tuan");
+        params.put("moduleName", "TDD");
     }
 }
