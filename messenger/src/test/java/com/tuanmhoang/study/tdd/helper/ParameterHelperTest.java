@@ -50,12 +50,13 @@ public class ParameterHelperTest {
         mapParams1.put("user", "Tuan");
         mapParams1.put("moduleName", "TDD");
 
-        String input1 = EXPECTED_CONSOLE_FILE_CONTENT.replace(PLACE_HOLDER_ADDRESS, mapParams1.get("address"))
+        String input1 = EXPECTED_CONSOLE_FILE_CONTENT
+            .replace(PLACE_HOLDER_ADDRESS, mapParams1.get("address"))
             .replace(PLACE_HOLDER_USER, mapParams1.get("user"))
             .replace(PLACE_HOLDER_MODULE, mapParams1.get("moduleName"));
 
-        ByteArrayInputStream inputStreamCaptor = new ByteArrayInputStream(input1.getBytes(StandardCharsets.UTF_8));
-        System.setIn(inputStreamCaptor);
+        ByteArrayInputStream inputStreamCaptor1 = new ByteArrayInputStream(input1.getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStreamCaptor1);
 
         parameterHelper = new CliParameterHelper(System.in);
 
@@ -67,20 +68,29 @@ public class ParameterHelperTest {
         assertEquals("Tuan",params1.get("user"));
         assertEquals("TDD",params1.get("moduleName"));
         //******//
-//        Map<String, String> mapParams2 = new HashMap<>();
-//        mapParams2.put("address", "sample2@demo.com");
-//        mapParams2.put("user", "Hoang");
-//        mapParams2.put("moduleName", "AWS");
-//
-//        parameterHelper = new CliParameterHelper(System.in);
-//
-//        Map<String, String> params1 = parameterHelper.getParams();
-//
-//        assertNotNull(params1);
-//        assertEquals(3,params1.size());
-//        assertEquals("sample@demo.com",params1.get("address"));
-//        assertEquals("Tuan",params1.get("user"));
-//        assertEquals("TDD",params1.get("moduleName"));
+        Map<String, String> mapParams2 = new HashMap<>();
+        mapParams2.put("address", "sample2@demo.com");
+        mapParams2.put("user", "Hoang");
+        mapParams2.put("moduleName", "AWS");
+
+        String input2 = EXPECTED_CONSOLE_FILE_CONTENT
+            .replace(PLACE_HOLDER_ADDRESS, mapParams2.get("address"))
+            .replace(PLACE_HOLDER_USER, mapParams2.get("user"))
+            .replace(PLACE_HOLDER_MODULE, mapParams2.get("moduleName"));
+
+        ByteArrayInputStream inputStreamCaptor2 = new ByteArrayInputStream(input2.getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStreamCaptor2);
+
+        parameterHelper = new CliParameterHelper(System.in);
+
+        Map<String, String> params2 = parameterHelper.getParams();
+
+        assertNotNull(params2);
+        assertEquals(3,params2.size());
+        assertEquals("sample2@demo.com",params2.get("address"));
+        assertEquals("Hoang",params2.get("user"));
+        assertEquals("AWS",params2.get("moduleName"));
+
     }
 
     @Test
