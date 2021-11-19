@@ -1,13 +1,11 @@
 package com.tuanmhoang.study.tdd.helper;
 
 import com.tuanmhoang.study.tdd.helper.exception.ParameterWrongFormatException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import org.apache.commons.io.IOUtils;
 
 public class CliParameterHelper implements ParameterHelper {
 
@@ -58,19 +56,5 @@ public class CliParameterHelper implements ParameterHelper {
                 this.params.put(parameterParts[0], parameterParts[1]);
             }
         }
-
-
-//        try {
-//            String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-//            System.out.println("result: " + result);
-//
-//
-//        } catch (IOException e) {
-//            System.err.println("Error while reading params from CONSOLE.");
-//        }
-//        params = new HashMap<>();
-//        params.put("address", "sample@demo.com");
-//        params.put("user", "Tuan");
-//        params.put("moduleName", "TDD");
     }
 }
