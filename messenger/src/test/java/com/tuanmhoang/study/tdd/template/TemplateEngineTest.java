@@ -14,9 +14,20 @@ public class TemplateEngineTest {
 
     private Client client = new Client("sample@test.com");
 
+    private static final String EXPECTED_MSG_FROM_FILE = "To: sample@test.com\n"
+        + "Hello Tuan!\n"
+        + "Today we are studying TDD\n"
+        + "This message is generated based on the FILE template.";
+
+    private static final String EXPECTED_MSG_FROM_CONSOLE = "To: sample@test.com\n"
+        + "Hello Tuan!\n"
+        + "Today we are studying TDD\n"
+        + "This message is generated based on the CONSOLE template.";
+
     @Test
     public void generateMessage_withTemplateCli_success() {
         template = new Template(new CliParameterHelper(System.in));
         String msg = templateEngine.generateMessage(template, client);
+        assertEquals(msg, EXPECTED_MSG_FROM_CONSOLE);
     }
 }
