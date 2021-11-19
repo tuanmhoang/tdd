@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class TemplateEngineTest {
     private TemplateEngine templateEngine = new TemplateEngine();
@@ -31,7 +32,12 @@ public class TemplateEngineTest {
 
     private static final String EXPECTED_MSG_FROM_CONSOLE = "To: sample@test.com\n"
         + "Hello Tuan!\n"
-        + "Today we are studying TDD\n"
+        + "Today we are studying TDD.\n"
+        + "This message is generated based on the CONSOLE template.";
+
+    private static final String CONSOLE_TEMPLATE_TEXT = "To: #{address}\n"
+        + "Hello #{user}!\n"
+        + "Today we are studying #{moduleName}.\n"
         + "This message is generated based on the CONSOLE template.";
 
     @Test
@@ -40,6 +46,8 @@ public class TemplateEngineTest {
         parameterHelper = mock(CliParameterHelper.class);
         doReturn(mockParams("sample@test.com", "Tuan", "TDD"))
             .when(parameterHelper).getParams();
+        doReturn(CONSOLE_TEMPLATE_TEXT)
+            .when(parameterHelper).getTemplateText();
 
         template = new Template(parameterHelper);
 
@@ -56,7 +64,7 @@ public class TemplateEngineTest {
 
         String expectedMsg2 = "To: sample@test.com\n"
             + "Hello Tuan2!\n"
-            + "Today we are studying AWS\n"
+            + "Today we are studying AWS.\n"
             + "This message is generated based on the CONSOLE template.";
         assertEquals(msg, expectedMsg2);
     }
