@@ -1,5 +1,6 @@
 package com.tuanmhoang.study.tdd.helper;
 
+import com.tuanmhoang.study.tdd.helper.exception.ParameterWrongFormatException;
 import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
 import java.io.ByteArrayInputStream;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
@@ -101,6 +103,28 @@ public class ParameterHelperTest {
         mapParams.put("user", user);
         mapParams.put("moduleName", module);
         return mapParams;
+    }
+
+    @Test
+    public void getParamsCli_shouldThrowExceptionWhenParamsInvalid(){
+        Map<String, String> mapParams = createMapOfParams(
+            "sample@demo.com",
+            "Tu=an",
+            "TDD"
+        );
+
+        ByteArrayInputStream inputStreamCaptor1 = buildInputStreamFromMapParams(mapParams);
+        System.setIn(inputStreamCaptor1);
+
+        parameterHelper = new CliParameterHelper(System.in);
+
+        ParameterWrongFormatException thrown = assertThrows(
+            ParameterWrongFormatException.class,
+            () -> parameterHelper.getParams()
+        );
+
+        assertEquals(thrown.getMessage(),"Parameters format is incorrect");
+
     }
 
     @Test
