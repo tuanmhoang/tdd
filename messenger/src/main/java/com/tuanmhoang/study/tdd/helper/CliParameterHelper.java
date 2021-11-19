@@ -1,5 +1,6 @@
 package com.tuanmhoang.study.tdd.helper;
 
+import com.tuanmhoang.study.tdd.helper.exception.ParameterWrongFormatException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -51,7 +52,9 @@ public class CliParameterHelper implements ParameterHelper {
                     break;
                 }
                 final String[] parameterParts = parameterLine.split("=", 2);
-
+                if (parameterParts.length != NUMBER_OF_PARAM_PARTS) {
+                    throw new ParameterWrongFormatException("Parameters format is incorrect");
+                }
                 this.params.put(parameterParts[0], parameterParts[1]);
             }
         }

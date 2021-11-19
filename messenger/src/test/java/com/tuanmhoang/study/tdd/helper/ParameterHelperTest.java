@@ -5,7 +5,10 @@ import com.tuanmhoang.study.tdd.helper.file.FileHelper;
 import com.tuanmhoang.study.tdd.helper.file.FileParameterHelperException;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -65,7 +68,7 @@ public class ParameterHelperTest {
 
         Map<String, String> params1 = parameterHelper.getParams();
 
-        checkMapParams(params1, "sample@demo.com","Tuan","TDD");
+        checkMapParams(params1, "sample@demo.com", "Tuan", "TDD");
         // case 2
         Map<String, String> mapParams2 = createMapOfParams(
             "sample2@demo.com",
@@ -77,7 +80,7 @@ public class ParameterHelperTest {
 
         parameterHelper = new CliParameterHelper(System.in);
         Map<String, String> params2 = parameterHelper.getParams();
-        checkMapParams(params2, "sample2@demo.com","Hoang","AWS");
+        checkMapParams(params2, "sample2@demo.com", "Hoang", "AWS");
     }
 
     private void checkMapParams(Map<String, String> params, String expectedAddr, String expectedUser, String expectedModule) {
@@ -106,15 +109,15 @@ public class ParameterHelperTest {
     }
 
     @Test
-    public void getParamsCli_shouldThrowExceptionWhenParamsInvalid(){
-        Map<String, String> mapParams = createMapOfParams(
-            "sample@demo.com",
-            "Tu=an",
-            "TDD"
-        );
+    public void getParamsCli_shouldThrowExceptionWhenParamsInvalid() {
+        List<String> incorrectInputs = Arrays.asList("this", "is", "correct");
 
-        ByteArrayInputStream inputStreamCaptor1 = buildInputStreamFromMapParams(mapParams);
-        System.setIn(inputStreamCaptor1);
+        String inputParams = incorrectInputs.stream()
+            .collect(Collectors.joining(System.lineSeparator(), "", System.lineSeparator()));
+
+        ByteArrayInputStream inputStreamCaptor = new ByteArrayInputStream(inputParams.getBytes(StandardCharsets.UTF_8));
+
+        System.setIn(inputStreamCaptor);
 
         parameterHelper = new CliParameterHelper(System.in);
 
@@ -123,7 +126,7 @@ public class ParameterHelperTest {
             () -> parameterHelper.getParams()
         );
 
-        assertEquals(thrown.getMessage(),"Parameters format is incorrect");
+        assertEquals(thrown.getMessage(), "Parameters format is incorrect");
 
     }
 
