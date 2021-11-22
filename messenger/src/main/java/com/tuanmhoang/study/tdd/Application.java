@@ -11,6 +11,8 @@ import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import com.tuanmhoang.study.tdd.template.Template;
 import com.tuanmhoang.study.tdd.template.TemplateEngine;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Application {
 
@@ -42,15 +44,16 @@ public class Application {
      * @param args arguments of the program
      */
     public void run(String[] args) {
-        cliHelper = new CliHelper();
+        cliHelper = new CliHelper(args);
         fileHelper = new FileHelper();
-        AppMode appMode = cliHelper.decideMode(args);
+        AppMode appMode = cliHelper.decideMode();
         if (appMode.equals(AppMode.CONSOLE)) {
             this.parameterHelper = new CliParameterHelper(System.in);
             this.mailServer = new MailServerCli(System.out);
         } else {
             this.parameterHelper = new FileParameterHelper(fileHelper);
-            this.mailServer = new MailServerFile();
+            final Path outputFile = Paths.get(cliHelper.getOutput());
+            this.mailServer = new MailServerFile(outputFile);
         }
         final Client client = new Client(sampleAddress);
         Template template = new Template(parameterHelper);

@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CliHelperTest {
 
-    private CliHelper cliHelper = new CliHelper();
+    private CliHelper cliHelper;
 
     @Test
     public void withParameterLengthIsZero_should_returnAppModeIsConsole(){
         String[] args = {};
-        AppMode actualAppMode = cliHelper.decideMode(args);
+        cliHelper = new CliHelper(args);
+        AppMode actualAppMode = cliHelper.decideMode();
         assertEquals(AppMode.CONSOLE,actualAppMode);
     }
 
@@ -25,7 +26,8 @@ public class CliHelperTest {
             CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
             CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
         };
-        AppMode actualAppMode = cliHelper.decideMode(args);
+        cliHelper = new CliHelper(args);
+        AppMode actualAppMode = cliHelper.decideMode();
         assertEquals(AppMode.FILE,actualAppMode);
     }
 
@@ -35,10 +37,10 @@ public class CliHelperTest {
             CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
             CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt"
         };
-
+        cliHelper = new CliHelper(args);
         CliArgumentException thrown = assertThrows(
             CliArgumentException.class,
-            () -> cliHelper.decideMode(args)
+            () -> cliHelper.decideMode()
         );
 
         assertTrue(thrown.getMessage().contains("Number of parameters is wrong"));
@@ -52,13 +54,24 @@ public class CliHelperTest {
             CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
             CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt"
         };
-
+        cliHelper = new CliHelper(args);
         CliArgumentException thrown = assertThrows(
             CliArgumentException.class,
-            () -> cliHelper.decideMode(args)
+            () -> cliHelper.decideMode()
         );
 
         assertTrue(thrown.getMessage().contains("Parameters is incorrect"));
         assertEquals(thrown.getNumberOfParameters(), args.length);
+    }
+
+    @Test
+    public void getOutput_shouldSuccess(){
+        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
+            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
+        };
+        cliHelper = new CliHelper(args);
+        String outputFile = cliHelper.getOutput();
+        assertEquals("output.txt",outputFile);
     }
 }
