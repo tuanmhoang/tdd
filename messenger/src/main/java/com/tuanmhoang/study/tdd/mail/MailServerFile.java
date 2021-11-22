@@ -19,6 +19,6 @@ public class MailServerFile implements MailServer{
 
     @Override
     public void send(String address, String content) {
-
+        System.out.println("not yet implemented");
     }
 }
