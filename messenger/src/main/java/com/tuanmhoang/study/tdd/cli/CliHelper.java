@@ -33,7 +33,7 @@ public class CliHelper {
         }
 
         if (isArgsInvalid(args)) {
-            throw new CliArgumentException("Parameters is incorrect", argsLength);
+            throw new CliArgumentException("Parameters is incorrect - argsLength: " + argsLength, argsLength);
         }
 
         return AppMode.FILE;

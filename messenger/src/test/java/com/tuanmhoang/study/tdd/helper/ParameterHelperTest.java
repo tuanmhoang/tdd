@@ -34,7 +34,7 @@ public class ParameterHelperTest {
 
     private static final String PLACE_HOLDER_MODULE = "#{moduleName}";
 
-    private static final String EXPECTED_TEMPLATE_FILE_CONTENT = "To: #{address}\n"
+    private static final String EXPECTED_TEMPLATE_FILE_CONTENT = "To #{address}\n"
         + "Hello #{user}!\n"
         + "Today we are studying #{moduleName}\n"
         + "This message is generated based on the FILE template.";
@@ -144,7 +144,8 @@ public class ParameterHelperTest {
         fileHelper = new FileHelper();
         parameterHelper = new FileParameterHelper(fileHelper);
         assertNotNull(parameterHelper.getParams());
-        assertEquals(2, parameterHelper.getParams().size());
+        assertEquals(3, parameterHelper.getParams().size());
+        assertEquals("hello@abc.com", parameterHelper.getParams().get("address"));
         assertEquals("Tuan", parameterHelper.getParams().get("user"));
         assertEquals("TDD", parameterHelper.getParams().get("moduleName"));
     }

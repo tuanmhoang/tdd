@@ -14,7 +14,7 @@ import static org.mockito.Mockito.spy;
 public class FileHelperTest {
     private FileHelper fileHelper = new FileHelper();
 
-    private static final String EXPECTED_FILE_CONTENT ="To: #{address}\n"
+    private static final String EXPECTED_FILE_CONTENT ="To #{address}\n"
         + "Hello #{user}!\n"
         + "Today we are studying #{moduleName}\n"
         + "This message is generated based on the FILE template.";
