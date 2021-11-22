@@ -8,6 +8,11 @@ public class CliHelper {
 
     private static final int REQUIRED_NUMBER_OF_PARAMS = 6;
 
+    /**
+     * Decides which mode should be used
+     * @param args arguments to decide the mode
+     * @return the mode based on the arguments
+     */
     public AppMode decideMode(String[] args) {
         final int argsLength = args.length;
 

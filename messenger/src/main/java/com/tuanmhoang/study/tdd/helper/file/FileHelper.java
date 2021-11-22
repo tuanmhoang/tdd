@@ -10,10 +10,19 @@ public class FileHelper {
 
     private String templateFileName;
 
+    /**
+     * Read file contents
+     *
+     * @return String of contents
+     *
+     * @throws FileParameterHelperException when file does not exist
+     */
     public String readFileContents() throws FileParameterHelperException {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(templateFileName);
-        if(resource == null ) throw new FileParameterHelperException("File does not exist.",templateFileName);
+        if (resource == null) {
+            throw new FileParameterHelperException("File does not exist.", templateFileName);
+        }
 
         File file = new File(resource.getFile());
         String content = null;
@@ -26,7 +35,7 @@ public class FileHelper {
     }
 
     public String readFileAsString(File file) throws IOException {
-        return FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n","\n");
+        return FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n", "\n");
     }
 
     public String getTemplateFileName() {

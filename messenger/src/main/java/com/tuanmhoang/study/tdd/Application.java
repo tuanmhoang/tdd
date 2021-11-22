@@ -22,6 +22,7 @@ public class Application {
 
     private ParameterHelper parameterHelper;
 
+    private static TemplateEngine templateEngine;
 
     private String sampleAddress = "johndoe@myapp.com";
 
@@ -31,14 +32,23 @@ public class Application {
      * @param args is the argument of this program
      */
     public static void main(String[] args) {
-        final Application main = createApp();
+        final Application main = new Application(templateEngine);
         main.run(args);
     }
 
-    public static Application createApp(){
-        return new Application();
+    public Application(TemplateEngine templateEngine){
+        this.templateEngine = templateEngine;
     }
 
+//    public static Application createApp(){
+//        Application app = new Application();
+//        return app;
+//    }
+
+    /**
+     * Run application
+     * @param args arguments of the program
+     */
     public void run(String[] args) {
         cliHelper = new CliHelper();
         fileHelper = new FileHelper();
@@ -46,17 +56,12 @@ public class Application {
         if (appMode.equals(AppMode.CONSOLE)){
             this.parameterHelper = new CliParameterHelper(System.in);
             this.mailServer = new MailServerCli();
-            //this.parameterHelper = new CliParameterHelper();
-            //this.template = new TemplateCli();
         } else {
             this.parameterHelper = new FileParameterHelper(fileHelper);
             this.mailServer = new MailServerFile();
-            //this.parameterHelper = new FileParameterHelper();
-            //this.template = new TemplateFile();
         }
         final Client client = new Client(sampleAddress);
         Template template = new Template(parameterHelper);
-        TemplateEngine templateEngine = new TemplateEngine();
         String generatedMessage = templateEngine.generateMessage(template,client);
         System.out.println("generatedMessage: "+ generatedMessage);
     }
