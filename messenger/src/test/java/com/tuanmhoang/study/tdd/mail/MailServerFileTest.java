@@ -16,7 +16,7 @@ public class MailServerFileTest {
 
     @Test
     @DisplayName("Write message to file")
-    public void writeMessageToFile(@TempDir Path tempDir) throws IOException {
+    public void send_shouldSuccess(@TempDir Path tempDir) throws IOException {
         Path outputFile = tempDir.resolve("messageFile");
         String addresses = "some@example.com";
         String message = "some message";

@@ -1,5 +1,7 @@
 package com.tuanmhoang.study.tdd.mail;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class MailServerFile implements MailServer{
@@ -19,6 +21,13 @@ public class MailServerFile implements MailServer{
 
     @Override
     public void send(String address, String content) {
-        System.out.println("not yet implemented");
+        final String toLine = String.format("to: %s%n", address);
+        final StringBuilder sb = new StringBuilder(toLine).append(content);
+        final String output = sb.toString();
+        try {
+            Files.write(outputFile, output.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            throw new MailServerFileException("Problem with writing to output file", outputFile.toString(), e);
+        }
     }
 }
