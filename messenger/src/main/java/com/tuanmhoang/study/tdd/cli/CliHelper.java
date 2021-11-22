@@ -56,7 +56,19 @@ public class CliHelper {
      * @return value of output
      */
     public String getOutput() {
-        return "";
+        final Map<CliArgument, String> arguments = new HashMap<>();
+        for (int i = 0; i < args.length; i++) {
+            final int finalI = i;
+            if (finalI % 2 == 0) {
+                Arrays.stream(CliArgument.values())
+                    .filter(arg -> arg.getParamName().equals(args[finalI]))
+                    .forEach(arg -> arguments.put(arg, args[finalI + 1]));
+            }
+        }
+        if (arguments.size() != CliArgument.values().length) {
+            throw new CliArgumentException("Names of parameters are wrong", arguments.size());
+        }
+        return arguments.get(CliArgument.OUTPUT_FILE_ARG);
     }
 
     private boolean isArgsInvalid(String[] args) {
