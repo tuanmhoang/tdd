@@ -2,7 +2,7 @@ package com.tuanmhoang.study.tdd.cli;
 
 import com.tuanmhoang.study.tdd.mode.AppMode;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public class CliHelper {
 
     private final String[] args;
 
-    public CliHelper(String[] args) {
+    public CliHelper(final String... args) {
         this.args = args;
     }
 
@@ -56,7 +56,7 @@ public class CliHelper {
      * @return value of output
      */
     public String getOutput() {
-        final Map<CliArgument, String> arguments = new HashMap<>();
+        final Map<CliArgument, String> arguments = new EnumMap<>(CliArgument.class);
         for (int i = 0; i < args.length; i++) {
             final int finalI = i;
             if (finalI % 2 == 0) {

@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MailServerCliTest {
 
-    private MailServer mailServer;
-
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 

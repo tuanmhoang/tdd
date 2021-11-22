@@ -22,9 +22,8 @@ public class MailServerFile implements MailServer{
     @Override
     public void send(String address, String content) {
         final String toLine = String.format("to: %s%n", address);
-        final StringBuilder sb = new StringBuilder(toLine).append(content);
-        final String output = sb.toString();
         try {
+            final String output = toLine + content;
             Files.write(outputFile, output.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             throw new MailServerFileException("Problem with writing to output file", outputFile.toString(), e);

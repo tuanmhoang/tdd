@@ -14,6 +14,9 @@ import com.tuanmhoang.study.tdd.template.TemplateEngine;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The application to send email
+ */
 public class Application {
 
     private MailServer mailServer;
