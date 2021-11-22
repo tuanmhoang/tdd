@@ -6,11 +6,6 @@ import com.tuanmhoang.study.tdd.helper.FileParameterHelper;
 import com.tuanmhoang.study.tdd.mail.MailServerCli;
 import com.tuanmhoang.study.tdd.mail.MailServerFile;
 import com.tuanmhoang.study.tdd.template.TemplateEngine;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +24,7 @@ public class ApplicationTest {
     private TemplateEngine mockedTemplateEngine = mock(TemplateEngine.class);
 
     @BeforeEach
-    public void init(){
+    public void init() {
         doReturn("mocked message").when(mockedTemplateEngine).generateMessage(any(), any());
     }
 
@@ -44,7 +39,8 @@ public class ApplicationTest {
     @Test
     public void getParameterHelper_shouldReturnCliParameterHelper() {
         String[] args = {};
-        app = new Application(mockedTemplateEngine);
+        app = new Application();
+        app.setTemplateEngine(mockedTemplateEngine);
         app.run(args);
         assertTrue(app.getParameterHelper() instanceof CliParameterHelper);
     }
@@ -55,7 +51,8 @@ public class ApplicationTest {
             CliArgument.PARAMS_FILE_ARG.getParamName(), "params.txt",
             CliArgument.OUTPUT_FILE_ARG.getParamName(), "output.txt"
         };
-        app = new Application(mockedTemplateEngine);
+        app = new Application();
+        app.setTemplateEngine(mockedTemplateEngine);
         app.run(args);
         assertTrue(app.getParameterHelper() instanceof FileParameterHelper);
     }
@@ -63,18 +60,20 @@ public class ApplicationTest {
     @Test
     public void getMailServer_shouldReturnMailServerCli() {
         String[] args = {};
-        app = new Application(mockedTemplateEngine);
+        app = new Application();
+        app.setTemplateEngine(mockedTemplateEngine);
         app.run(args);
         assertTrue(app.getMailServer() instanceof MailServerCli);
     }
 
     @Test
     public void getMailServer_shouldReturnMailServerFile() {
-        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(),"template.txt",
-            CliArgument.PARAMS_FILE_ARG.getParamName(),"params.txt",
-            CliArgument.OUTPUT_FILE_ARG.getParamName(),"output.txt"
+        String[] args = {CliArgument.TEMPLATE_FILE_ARG.getParamName(), "template.txt",
+            CliArgument.PARAMS_FILE_ARG.getParamName(), "params.txt",
+            CliArgument.OUTPUT_FILE_ARG.getParamName(), "output.txt"
         };
-        app = new Application(mockedTemplateEngine);
+        app = new Application();
+        app.setTemplateEngine(mockedTemplateEngine);
         app.run(args);
         assertTrue(app.getMailServer() instanceof MailServerFile);
     }
