@@ -19,7 +19,7 @@ public class MailServerCli implements MailServer{
 
     @Override
     public void send(String address, String content) {
-
+        out.format("to: %s%n%s", address, content);
     }
 
 }
