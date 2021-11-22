@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MailServerTest {
+public class MailServerCliTest {
 
     private MailServer mailServer;
 
