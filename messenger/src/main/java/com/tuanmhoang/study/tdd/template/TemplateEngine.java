@@ -26,7 +26,6 @@ public class TemplateEngine {
     public String generateMessage(Template template, Client client) {
         ParameterHelper parameterHelper = template.getParameterHelper();
         String templateText = parameterHelper.getTemplateText();
-
         final Matcher parameterMatcher = parameterPattern.matcher(templateText);
         Map<String,String> params = parameterHelper.getParams();
 

@@ -1,0 +1,5 @@
+to: johndoe@myapp.com
+To hello@abc.com
+Hello Tuan!
+Today we are studying TDD
+This message is generated based on the FILE template.

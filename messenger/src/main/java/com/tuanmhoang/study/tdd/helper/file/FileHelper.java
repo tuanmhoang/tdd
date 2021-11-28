@@ -23,14 +23,9 @@ public class FileHelper {
     public String readFileContents() throws FileParameterHelperException {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(templateFileName);
-//        System.out.println("[1111111] ");
-//        System.out.println("[1] resource: "+ resource.toString());
-//        final URL resource1 = Thread.currentThread().getContextClassLoader().getResource("myresource.xml");
-//        System.out.println("[1] resource1: "+ resource1.toString());
         if (resource == null) {
             throw new FileParameterHelperException("File does not exist.", templateFileName);
         }
-
         File file = new File(resource.getFile());
         String content = null;
         try {
@@ -48,16 +43,7 @@ public class FileHelper {
      * @throws IOException when exception
      */
     public String readFileAsString(File file) throws IOException {
-//        System.out.println("[1]");
-//        Path pathaaaa = Paths.get(file.getName());
-//        final String path = file.getAbsolutePath();
-//        System.out.println("[2]"+ pathaaaa);
-//
-//        final URL resource = ClassLoader.getSystemClassLoader().getResource("template-study.txt");
-//        System.out.println("[2] resource: "+ resource);
-//        System.out.println("[3]"+file.getAbsolutePath());
-//        System.out.println("[********]");
-        //return Files.readString(Path.of(file.getPath()), StandardCharsets.UTF_8).replace("\r\n", "\n");
+
         return FileUtils.readFileToString(file, StandardCharsets.UTF_8).replace("\r\n", "\n");
     }
 
