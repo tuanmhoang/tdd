@@ -1,0 +1,4 @@
+To #{address}
+Hello #{user}!
+Today we are studying #{moduleName}
+This message is generated based on the FILE template.

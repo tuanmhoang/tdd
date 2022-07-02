@@ -1,0 +1,2 @@
+to: johndoe@myapp.com
+mocked message
